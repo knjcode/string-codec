@@ -1,6 +1,6 @@
 {
   "name": "string-codec",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "encoder/decoder of various algorithm",
   "main": "./lib/string-codec",
   "scripts": {
