@@ -1,6 +1,8 @@
 # string-codec
 
-encoder/decoder of various encode/decode algorithm
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
+
+Encoder/Decoder of various algorithm
 
 ## Installation
 
@@ -71,9 +73,25 @@ Decode from Base64:
 |unixtime|unix timestamp|date string|
 |md5|md5|string|
 
+### Hex string (Hexadecimal string)
+
+#### Input hex string
+
+Accept input hex string prefixed with '0x' or separated by a colon (:)
+
+    codec.decoder('616263','hex');
+    // => abc
+    codec.decoder('0x616263','hex');
+    // => abc
+    codec.decoder('61:62:63','hex');
+    // => abc
+    codec.decoder('0x61:62:63','hex');
+    // => abc
+
 ## Running tests
 
-    $ npm install string-codec
+    $ git clone https://github.com/knjcode/string-codec.git
+    $ cd string-codec
     $ npm install
     $ npm test
 
