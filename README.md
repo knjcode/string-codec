@@ -45,6 +45,8 @@ Decode from Base64:
 |adler32|string|adler32|
 |url (url encoding)|string|url encode|
 |unixtime|date string|unix timestamp|
+|lower|string|string|
+|upper|string|string|
 |md4|string|md4|
 |md5|string|md5|
 |sha|string|sha|
