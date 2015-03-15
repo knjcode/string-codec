@@ -1,5 +1,4 @@
 assert = require 'power-assert'
-sinon = require 'sinon'
 codec = require '../../lib/string-codec'
 
 encode_testset =
