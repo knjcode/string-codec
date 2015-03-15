@@ -75,11 +75,9 @@ Decode from Base64:
 |unixtime|unix timestamp|date string|
 |md5|md5|string|
 
-### Hex string (Hexadecimal string)
+### Input hex string
 
-#### Input hex string
-
-Accept input hex string prefixed with '0x' or separated by a colon (:)
+Accept hex string prefixed with '0x' or separated by a colon (:)
 
     codec.decoder('616263','hex');
     // => abc
@@ -100,6 +98,7 @@ Accept input hex string prefixed with '0x' or separated by a colon (:)
 ## Acknowledgements
 
 - @_rintaro_f
+- @inaz2
 - basE91 based on [mscdex/base91.js](https://github.com/mscdex/base91.js)
 - Ascii85/z85/rfc1924 based on [noseglid/base85](https://github.com/noseglid/base85)
 - rot5/rot13/rot18/rot47 [schnittstabil/caesar-salad](https://github.com/schnittstabil/caesar-salad)
