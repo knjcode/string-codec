@@ -12,7 +12,7 @@ request = require 'sync-request'
 allencoder = []
 encalgos = ['hex', 'ascii', 'base64', 'ascii85', 'base91', 'rot5', 'rot13',
             'rot18', 'rot47', 'rev', 'z85', 'rfc1924', 'crc1', 'crc8', 'crc16',
-            'crc24', 'crc32', 'adler32', 'url', 'unixtime']
+            'crc24', 'crc32', 'adler32', 'url', 'unixtime', 'lower', 'upper']
 enchashes = ['md4', 'md5', 'sha', 'sha1', 'sha224', 'sha256', 'sha384',
              'sha512', 'rmd160', 'whirlpool']
 allenchashes = enchashes.concat(crypto.getHashes())
@@ -106,6 +106,10 @@ module.exports.encoder = (str, algo) ->
       encodeURIComponent(str)
     when 'unixtime'
       Date.parse(str).toString(10)
+    when 'lower'
+      str.toLowerCase()
+    when 'upper'
+      str.toUpperCase()
     else
       if algo in allenchashes
         crypto.createHash(algo).update(str, 'utf8').digest('hex')
