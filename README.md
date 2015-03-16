@@ -47,6 +47,7 @@ Decode from Base64:
 |unixtime|date string|unix timestamp|
 |lower|string|string|
 |upper|string|string|
+|deflate|hex string|hex string|
 |md4|string|md4|
 |md5|string|md5|
 |sha|string|sha|
@@ -73,6 +74,7 @@ Decode from Base64:
 |rfc1924|base85 IPv6 string|IPv6 address|
 |url|url encode|string|
 |unixtime|unix timestamp|date string|
+|deflate|hex string|hex string|
 |md5|md5|string|
 
 ### Input hex string

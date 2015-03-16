@@ -1,6 +1,7 @@
 'use strict'
 
 crc = require 'crc'
+zlib = require 'zlib'
 crypto = require 'crypto'
 base85 = require '../lib/base85'
 base91 = require '../lib/base91'
@@ -12,7 +13,8 @@ request = require 'sync-request'
 allencoder = []
 encalgos = ['hex', 'ascii', 'base64', 'ascii85', 'base91', 'rot5', 'rot13',
             'rot18', 'rot47', 'rev', 'z85', 'rfc1924', 'crc1', 'crc8', 'crc16',
-            'crc24', 'crc32', 'adler32', 'url', 'unixtime', 'lower', 'upper']
+            'crc24', 'crc32', 'adler32', 'url', 'unixtime', 'lower', 'upper',
+            'deflate']
 enchashes = ['md4', 'md5', 'sha', 'sha1', 'sha224', 'sha256', 'sha384',
              'sha512', 'rmd160', 'whirlpool']
 allenchashes = enchashes.concat(crypto.getHashes())
@@ -22,7 +24,8 @@ allencoder = allencoder.concat(encalgos,allenchashes)
 
 alldecoder = []
 decalgos = ['hex', 'ascii', 'base64', 'ascii85', 'base91', 'rot5', 'rot13',
-            'rot18', 'rot47', 'rev', 'z85', 'rfc1924', 'url', 'unixtime']
+            'rot18', 'rot47', 'rev', 'z85', 'rfc1924', 'url', 'unixtime',
+            'deflate']
 dechashes = ['md5']
 alldecoder = alldecoder.concat(decalgos,dechashes)
 
@@ -110,6 +113,10 @@ module.exports.encoder = (str, algo) ->
       str.toLowerCase()
     when 'upper'
       str.toUpperCase()
+    when 'deflate'
+      if hex = hex_parse(str)
+        buffer = new Buffer(hex, 'hex')
+        new zlib.Deflate()._processChunk(buffer, zlib.Z_FINISH).toString('hex')
     else
       if algo in allenchashes
         crypto.createHash(algo).update(str, 'utf8').digest('hex')
@@ -138,6 +145,10 @@ module.exports.decoder = (str, algo) ->
       decodeURIComponent(str)
     when 'unixtime'
       new Date(parseInt(str)).toString('utf8')
+    when 'deflate'
+      if not (str.length % 2)
+        buffer = new Buffer(str, 'hex')
+        new zlib.Inflate()._processChunk(buffer, zlib.Z_FINISH).toString('hex')
     when 'md5'
       decrypter[algo](str)
     else

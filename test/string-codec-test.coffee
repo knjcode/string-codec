@@ -55,6 +55,8 @@ encode_testset =
     'abcDEF':'abcdef'
   'upper':
     'abcDEF':'ABCDEF'
+  'deflate':
+    '616263':'789c4b4c4a0600024d0127'
   'md4':
     'abc':'a448017aaf21d8525fc10ae87aa6729d'
   'md5':
@@ -110,6 +112,8 @@ decode_testset =
     '9R}vSQZ1W=8fRv3*HAqn':'2001:db8:100:f101::1'
   'url':
     '%E3%81%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A':'あいうえお'
+  'deflate':
+    '789c4b4c4a0600024d0127':'616263'
   # depends on local timezone
   # 'unixtime':
   #   '1424580000000':'Sun Feb 22 2015 13:40:00 GMT+0900 (JST)'
