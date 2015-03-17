@@ -29,13 +29,11 @@
   "homepage": "https://github.com/knjcode/string-codec",
   "dependencies": {
     "adler-32": "^0.2.1",
-    "bignum": "^0.9.2",
+    "ascii85": "^0.1.0",
     "caesar-salad": "^0.1.6",
     "cheerio": "^0.18.0",
     "crc": "^3.2.1",
-    "ipv6": "^3.1.1",
-    "sync-request": "^2.0.1",
-    "underscore": "^1.8.2"
+    "sync-request": "^2.0.1"
   },
   "devDependencies": {
     "coffee-script": "^1.9.1",

@@ -2,7 +2,7 @@
 
 crc = require 'crc'
 crypto = require 'crypto'
-base85 = require '../lib/base85'
+ascii85 = require 'ascii85'
 base91 = require '../lib/base91'
 caesar = require 'caesar-salad'
 adler32 = require 'adler-32'
@@ -10,8 +10,8 @@ cheerio = require 'cheerio'
 request = require 'sync-request'
 
 allencoder = []
-encalgos = ['hex', 'ascii', 'base64', 'ascii85', 'base91', 'rot5', 'rot13',
-            'rot18', 'rot47', 'rev', 'z85', 'rfc1924', 'crc1', 'crc8', 'crc16',
+encalgos = ['hex', 'ascii', 'base64', 'base85', 'z85', 'ascii85', 'base91',
+            'rot5', 'rot13', 'rot18', 'rot47', 'rev', 'crc1', 'crc8', 'crc16',
             'crc24', 'crc32', 'adler32', 'url', 'unixtime', 'lower', 'upper']
 enchashes = ['md4', 'md5', 'sha', 'sha1', 'sha224', 'sha256', 'sha384',
              'sha512', 'rmd160', 'whirlpool']
@@ -21,8 +21,8 @@ allenchashes = allenchashes.filter((x, i, self) -> self.indexOf(x) is i)
 allencoder = allencoder.concat(encalgos,allenchashes)
 
 alldecoder = []
-decalgos = ['hex', 'ascii', 'base64', 'ascii85', 'base91', 'rot5', 'rot13',
-            'rot18', 'rot47', 'rev', 'z85', 'rfc1924', 'url', 'unixtime']
+decalgos = ['hex', 'ascii', 'base64', 'base85', 'z85', 'ascii85', 'base91',
+            'rot5', 'rot13', 'rot18', 'rot47', 'rev', 'url', 'unixtime']
 dechashes = ['md5']
 alldecoder = alldecoder.concat(decalgos,dechashes)
 
@@ -85,7 +85,7 @@ module.exports.encoder = (str, algo) ->
     when 'hex', 'base64'
       new Buffer(str).toString(algo)
     when 'ascii85'
-      base85.encode(str, 'ascii85')
+      ascii85.PostScript.encode(str)
     when 'base91'
       if hex = hex_parse(str)
         base91.encode(Buffer(hex, 'hex')).toString('utf8')
@@ -94,10 +94,8 @@ module.exports.encoder = (str, algo) ->
         Buffer(hex, 'hex').toString('utf8')
     when 'rot5', 'rot13', 'rot18', 'rot47', 'rev'
       recipro[algo](str)
-    when 'z85'
-      base85.encode(str, 'z85')
-    when 'rfc1924'
-      base85.encode(str, 'ipv6')
+    when 'base85', 'z85'
+      ascii85.ZeroMQ.encode(str)
     when 'crc1', 'crc8', 'crc16', 'crc24', 'crc32'
       crc[algo](str).toString(16)
     when 'adler32'
@@ -123,17 +121,15 @@ module.exports.decoder = (str, algo) ->
     when 'base64'
       new Buffer(str, algo).toString('utf8')
     when 'ascii85'
-      base85.decode(str, 'ascii85').toString('utf8')
+      ascii85.decode(str).toString('utf8')
     when 'base91'
       base91.decode(str).toString('hex')
     when 'ascii'
       new Buffer(str, algo).toString('hex')
     when 'rot5', 'rot13', 'rot18', 'rot47', 'rev'
       recipro[algo](str)
-    when 'z85'
-      base85.decode(str, 'z85').toString('utf8')
-    when 'rfc1924'
-      base85.decode(str, 'ipv6').toString('utf8')
+    when 'base85', 'z85'
+      ascii85.ZeroMQ.decode(str).toString('utf8')
     when 'url'
       decodeURIComponent(str)
     when 'unixtime'
