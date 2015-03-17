@@ -36,12 +36,11 @@ gulp.task 'compile', ['lint'], ->
       .pipe gulp.dest('./lib')
     gulp.src paths.tests
       .pipe $.sourcemaps.init()
-      .pipe($.coffee({ bare: true }).on('error', $.util.log))
+      .pipe($.coffee(bare: true).on('error', $.util.log))
       .pipe $.sourcemaps.write()
       .pipe $.espower()
       .pipe gulp.dest('./compile/test')
   )
-  undefined
 
 gulp.task 'test', ['compile'], ->
   gulp.src ['./compile/test/**/*.js'], {cwd: __dirname}
