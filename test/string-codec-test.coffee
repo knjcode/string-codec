@@ -33,8 +33,6 @@ encode_testset =
     'abc':'cba'
   'z85':
     'abc':'vpAZ'
-  'rfc1924':
-    '2001:db8:100:f101::1':'9R}vSQZ1W=8fRv3*HAqn'
   'crc1':
     'abc':'26'
   'crc8':
@@ -106,8 +104,6 @@ decode_testset =
     'cba':'abc'
   'z85':
     'vpAZ':'abc'
-  'rfc1924':
-    '9R}vSQZ1W=8fRv3*HAqn':'2001:db8:100:f101::1'
   'url':
     '%E3%81%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A':'あいうえお'
   # depends on local timezone
