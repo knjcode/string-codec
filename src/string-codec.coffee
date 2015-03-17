@@ -34,17 +34,10 @@ hex_parse = (str) ->
   else
     false
 
-rot5 = (str) ->
-  caesar.ROT5.Cipher().crypt(str)
-
-rot13 = (str) ->
-  caesar.ROT13.Cipher().crypt(str)
-
-rot18 = (str) ->
-  caesar.ROT18.Cipher().crypt(str)
-
-rot47 = (str) ->
-  caesar.ROT47.Cipher().crypt(str)
+# rot helper
+rotX = (algo) ->
+  (str) ->
+    caesar[algo].Cipher().crypt(str)
 
 # reverse string
 rev = (str) ->
@@ -52,10 +45,10 @@ rev = (str) ->
 
 # reciprocal cipher helper
 recipro = {
-  rot5: rot5,
-  rot13: rot13,
-  rot18: rot18,
-  rot47: rot47,
+  rot5: rotX('ROT5'),
+  rot13: rotX('ROT13'),
+  rot18: rotX('ROT18'),
+  rot47: rotX('ROT47'),
   rev: rev
 }
 
