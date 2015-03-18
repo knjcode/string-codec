@@ -32,7 +32,6 @@ gulp.task 'compile', ['lint'], ->
     gulp.src paths.source
       .pipe $.sourcemaps.init()
       .pipe($.coffee(bare: true).on('error', $.util.log))
-      .pipe $.sourcemaps.write()
       .pipe gulp.dest('./lib')
     gulp.src paths.tests
       .pipe $.sourcemaps.init()
