@@ -27,12 +27,12 @@ dechashes = ['md5']
 alldecoder = alldecoder.concat(decalgos,dechashes)
 
 module.exports =
-  ENC_ALGOS:  encalgos
-  ENC_HASHES: allenchashes
-  ENC_ALL:    allencoder
-  DEC_ALGOS:  decalgos
-  DEC_HASHES: dechashes
-  DEC_ALL:    alldecoder
+  ENC_ALGOS:  encalgos[..]
+  ENC_HASHES: allenchashes[..]
+  ENC_ALL:    allencoder[..]
+  DEC_ALGOS:  decalgos[..]
+  DEC_HASHES: dechashes[..]
+  DEC_ALL:    alldecoder[..]
 
 # hex parse helper
 hex_parse = (str) ->
