@@ -143,3 +143,9 @@ describe 'constants test', ->
     assert.ok codec.DEC_HASHES.toString().match('md5')
   it 'DEC_ALL', ->
     assert.ok codec.DEC_ALL.toString().match('hex')
+
+describe 'error test', ->
+  it 'encoding error', ->
+    assert codec.encoder('abc', 'hoge') is 'Error: unknown algorithm specified'
+  it 'decoding error', ->
+    assert codec.decoder('abc', 'hoge') is 'Error: unknown algorithm specified'

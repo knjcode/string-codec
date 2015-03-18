@@ -112,6 +112,9 @@ module.exports.encoder = (str, algo) ->
     else
       if algo in allenchashes
         crypto.createHash(algo).update(str, 'utf8').digest('hex')
+      else
+        'Error: unknown algorithm specified'
+
 
 # decode helper
 module.exports.decoder = (str, algo) ->
@@ -138,4 +141,4 @@ module.exports.decoder = (str, algo) ->
     when 'md5'
       decrypter[algo](str)
     else
-      return 'not implemented'
+      'Error: unknown algorithm specified'
