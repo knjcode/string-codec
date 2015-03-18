@@ -26,6 +26,55 @@ Decode from Base64:
     codec.decoder('aGVsbG8=','base64')
     // => 'hello'
 
+List supported algorithm
+
+    var codec = require('string-codec');
+    
+    // list array of encoding algorithm
+    codec.ENC_ALGOS
+    // => ["hex","ascii","base64","base85","z85","ascii85","base91","rot5",
+           "rot13", "rot18", "rot47","rev","crc1","crc8","crc16","crc24",
+           "crc32","adler32","url","unixtime","lower","upper"]
+    
+    // list array of decoding algorithm
+    codec.DEC_ALGOS
+    // => ["hex","ascii","base64","base85","z85","ascii85","base91","rot5",
+           "rot13","rot18","rot47","rev","url","unixtime"]
+
+## API
+
+** encode(input, algorithm) **
+
+encode input with specified algorithm
+
+** decode(input, algorithm) **
+
+decode input with specified algorithm
+
+** ENC_ALGOS **
+
+list supported encoding algorithm
+
+** ENC_HASHES **
+
+list supported hash algorithm
+
+** ENC_ALL **
+
+list all supported encoding algorithm (ENC_ALGOS + ENC_HASHES)
+
+** DEC_ALGOS **
+
+list supported decoding algorithm
+
+** DEC_HASHES **
+
+list supported hash decryption algorithm
+
+** DEC_ALL **
+
+list all supported decoding algorithm (DEC_ALGOS + DEC_HASHES)
+
 ## Supported specifications
 
 ### encoder

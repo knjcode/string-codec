@@ -129,3 +129,17 @@ describe 'decode test', ->
         do (key, value) ->
           it algo + ': ' + key + ' -> ' + value, ->
             assert codec.decoder(key, algo) is value
+
+describe 'constants test', ->
+  it 'ENC_ALGOS', ->
+    assert.ok codec.ENC_ALGOS.toString().match('hex')
+  it 'ENC_HASHES', ->
+    assert.ok codec.ENC_HASHES.toString().match('md4')
+  it 'ENC_ALL', ->
+    assert.ok codec.ENC_ALL.toString().match('hex')
+  it 'DEC_ALGOS', ->
+    assert.ok codec.DEC_ALGOS.toString().match('hex')
+  it 'DEC_HASHES', ->
+    assert.ok codec.DEC_HASHES.toString().match('md5')
+  it 'DEC_ALL', ->
+    assert.ok codec.DEC_ALL.toString().match('hex')

@@ -26,6 +26,14 @@ decalgos = ['hex', 'ascii', 'base64', 'base85', 'z85', 'ascii85', 'base91',
 dechashes = ['md5']
 alldecoder = alldecoder.concat(decalgos,dechashes)
 
+module.exports =
+  ENC_ALGOS:  encalgos[..]
+  ENC_HASHES: allenchashes[..]
+  ENC_ALL:    allencoder[..]
+  DEC_ALGOS:  decalgos[..]
+  DEC_HASHES: dechashes[..]
+  DEC_ALL:    alldecoder[..]
+
 # hex parse helper
 hex_parse = (str) ->
   hex = str.replace(/0x|:/g, '')
