@@ -43,35 +43,35 @@ List supported algorithm
 
 ## API
 
-** encode(input, algorithm) **
+__encoder(input, algorithm)__
 
 encode input with specified algorithm
 
-** decode(input, algorithm) **
+__decoder(input, algorithm)__
 
 decode input with specified algorithm
 
-** ENC_ALGOS **
+__ENC_ALGOS__
 
 list supported encoding algorithm
 
-** ENC_HASHES **
+__ENC_HASHES__
 
 list supported hash algorithm
 
-** ENC_ALL **
+__ENC_ALL__
 
 list all supported encoding algorithm (ENC_ALGOS + ENC_HASHES)
 
-** DEC_ALGOS **
+__DEC_ALGOS__
 
 list supported decoding algorithm
 
-** DEC_HASHES **
+__DEC_HASHES__
 
 list supported hash decryption algorithm
 
-** DEC_ALL **
+__DEC_ALL__
 
 list all supported decoding algorithm (DEC_ALGOS + DEC_HASHES)
 
