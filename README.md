@@ -12,21 +12,35 @@ via [npm (node package manager)](http://github.com/npm/npm)
 
 ## Usage Example
 
-Encode to Base64:
+Require package:
 
     var codec = require('string-codec');
-    
+
+Encode to Base64:
+
     codec.encoder('hello','base64');
     // => 'aGVsbG8='
 
 Decode from Base64:
 
-    var codec = require('string-codec');
-    
-    codec.decoder('aGVsbG8=','base64')
+    codec.decoder('aGVsbG8=','base64');
     // => 'hello'
 
-List supported algorithm
+Encode Buffer to Base64:
+
+    buffer = new Buffer('hello');
+    // => <Buffer 68 65 6c 6c 6f>
+    encbuf = codec.bufferEncoder(buffer,'base64');
+    // => <Buffer 61 47 56 73 62 47 38 3d>
+    encbuf.toString();
+    // => 'aGVsbG8='
+    
+    decbuf = codec.bufferDecoder(encbuf,'base64');
+    // => <Buffer 68 65 6c 6c 6f>
+    decbuf.toString();
+    // => 'hello'
+
+List supported algorithm:
 
     var codec = require('string-codec');
     
@@ -43,13 +57,21 @@ List supported algorithm
 
 ## API
 
-__encoder(input, algorithm)__
+__encoder(String input, String algorithm)__
 
 encode input with specified algorithm
 
-__decoder(input, algorithm)__
+__bufferEncoder(Buffer input, String algorithm)__
+
+encode input buffer with specified algorithm
+
+__decoder(String input, String algorithm)__
 
 decode input with specified algorithm
+
+__bufferDecoder(Buffer input, String algorithm)__
+
+decode input buffer with specified algorithm
 
 __ENC_ALGOS__
 
@@ -77,7 +99,11 @@ list all supported decoding algorithm (DEC_ALGOS + DEC_HASHES)
 
 ## Supported specifications
 
-### encoder
+### encoder / bufferEncoder
+
+__encoder__ requires string input and outputs string
+
+__bufferEncoder__ requires Buffer input and output Buffer
 
 |algorithm|input|output|
 |:--|:--|:--|
@@ -106,7 +132,11 @@ list all supported decoding algorithm (DEC_ALGOS + DEC_HASHES)
 |rmd160|string|rmd160|
 |whirlpool|string|whirlpool|
 
-### decoder
+### decode / bufferDecoder
+
+__decoder__ requires string input and outputs string
+
+__bufferDecoder__ requires Buffer input and outputs Buffer
 
 |algorithm|input|output|
 |:--|:--|:--|

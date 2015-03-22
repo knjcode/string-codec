@@ -26,14 +26,6 @@ decalgos = ['hex', 'ascii', 'base64', 'base85', 'z85', 'ascii85', 'base91',
 dechashes = ['md5']
 alldecoder = alldecoder.concat(decalgos,dechashes)
 
-module.exports =
-  ENC_ALGOS:  encalgos[..]
-  ENC_HASHES: allenchashes[..]
-  ENC_ALL:    allencoder[..]
-  DEC_ALGOS:  decalgos[..]
-  DEC_HASHES: dechashes[..]
-  DEC_ALL:    alldecoder[..]
-
 # hex parse helper
 hex_parse = (str) ->
   hex = str.replace(/0x|:/g, '')
@@ -80,65 +72,84 @@ decrypter = {
 }
 
 
-# encode helper
-module.exports.encoder = (str, algo) ->
+# string encoder
+encoder = (str, algo) ->
+  bufferEncoder(new Buffer(str), algo).toString()
+
+# buffer encoder
+bufferEncoder = (buf, algo) ->
   switch algo
     when 'hex', 'base64'
-      new Buffer(str).toString(algo)
+      new Buffer(buf.toString(algo))
     when 'ascii85'
-      ascii85.PostScript.encode(str)
+      new Buffer(ascii85.PostScript.encode(buf))
     when 'base91'
-      if hex = hex_parse(str)
-        base91.encode(Buffer(hex, 'hex')).toString('utf8')
+      if hex = hex_parse(buf.toString())
+        base91.encode(new Buffer(hex, 'hex'))
     when 'ascii'
-      if hex = hex_parse(str)
-        Buffer(hex, 'hex').toString('utf8')
+      if hex = hex_parse(buf.toString())
+        Buffer(hex, 'hex')
     when 'rot5', 'rot13', 'rot18', 'rot47', 'rev'
-      recipro[algo](str)
+      new Buffer(recipro[algo](buf.toString()))
     when 'base85', 'z85'
-      ascii85.ZeroMQ.encode(str)
+      ascii85.ZeroMQ.encode(buf)
     when 'crc1', 'crc8', 'crc16', 'crc24', 'crc32'
-      crc[algo](str).toString(16)
+      new Buffer(crc[algo](buf).toString(16), 'ascii')
     when 'adler32'
-      adler32.str(str).toString(16)
+      new Buffer(adler32.buf(buf).toString(16))
     when 'url'
-      encodeURIComponent(str)
+      new Buffer(encodeURIComponent(buf.toString()))
     when 'unixtime'
-      Date.parse(str).toString(10)
+      new Buffer(Date.parse(buf.toString()).toString(10))
     when 'lower'
-      str.toLowerCase()
+      new Buffer(buf.toString().toLowerCase())
     when 'upper'
-      str.toUpperCase()
+      new Buffer(buf.toString().toUpperCase())
     else
       if algo in allenchashes
-        crypto.createHash(algo).update(str, 'utf8').digest('hex')
+        new Buffer(crypto.createHash(algo).update(buf).digest('hex'))
       else
-        'Error: unknown algorithm specified'
+        new Buffer('Error: unknown algorithm specified')
 
+# string decoder
+decoder = (str, algo) ->
+  bufferDecoder(new Buffer(str), algo).toString()
 
-# decode helper
-module.exports.decoder = (str, algo) ->
+# buffer decoder
+bufferDecoder = (buf, algo) ->
   switch algo
     when 'hex'
-      if not (str.length % 2)
-        new Buffer(str, algo).toString('utf8')
+      if hex = hex_parse(buf.toString())
+        new Buffer(hex, algo)
     when 'base64'
-      new Buffer(str, algo).toString('utf8')
+      new Buffer(buf.toString(), algo)
     when 'ascii85'
-      ascii85.decode(str).toString('utf8')
+      new Buffer(ascii85.decode(buf))
     when 'base91'
-      base91.decode(str).toString('hex')
+      new Buffer(base91.decode(buf).toString('hex'))
     when 'ascii'
-      new Buffer(str, algo).toString('hex')
+      new Buffer(buf.toString('hex'))
     when 'rot5', 'rot13', 'rot18', 'rot47', 'rev'
-      recipro[algo](str)
+      new Buffer(recipro[algo](buf.toString()))
     when 'base85', 'z85'
-      ascii85.ZeroMQ.decode(str).toString('utf8')
+      ascii85.ZeroMQ.decode(buf)
     when 'url'
-      decodeURIComponent(str)
+      new Buffer(decodeURIComponent(buf.toString()))
     when 'unixtime'
-      new Date(parseInt(str)).toString('utf8')
+      new Buffer((new Date(parseInt(buf.toString())).toString()))
     when 'md5'
-      decrypter[algo](str)
+      new Buffer(decrypter[algo](buf.toString()))
     else
-      'Error: unknown algorithm specified'
+      new Buffer('Error: unknown algorithm specified')
+
+module.exports =
+  encoder:        encoder
+  bufferEncoder:  bufferEncoder
+  decoder:        decoder
+  bufferDecoder:  bufferDecoder
+  ENC_ALGOS:      encalgos[..]
+  ENC_HASHES:     allenchashes[..]
+  ENC_ALL:        allencoder[..]
+  DEC_ALGOS:      decalgos[..]
+  DEC_HASHES:     dechashes[..]
+  DEC_ALL:        alldecoder[..]
