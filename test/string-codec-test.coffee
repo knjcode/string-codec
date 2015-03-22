@@ -130,7 +130,15 @@ describe 'decode test', ->
           it algo + ': ' + key + ' -> ' + value, ->
             assert codec.decoder(key, algo) is value
 
-describe 'constants test', ->
+describe 'buffer encode and decode test', ->
+  it 'decode and encode binary data to base64', ->
+    # base64 encode of EUC-JP string 'これはペンです'
+    base64str = 'pLOk7KTPpdql86THpLk='
+    eucbuffer = codec.bufferDecoder(new Buffer(base64str),'base64')
+    enceucbuf = codec.bufferEncoder(eucbuffer,'base64')
+    assert enceucbuf.toString() is 'pLOk7KTPpdql86THpLk='
+
+describe 'list algorithm test', ->
   it 'ENC_ALGOS', ->
     assert.ok codec.ENC_ALGOS.toString().match('hex')
   it 'ENC_HASHES', ->
