@@ -74,7 +74,9 @@ decrypter = {
 
 # string encoder
 encoder = (str, algo) ->
-  bufferEncoder(new Buffer(str), algo).toString()
+  enc = bufferEncoder(new Buffer(str), algo)
+  if enc isnt undefined
+    enc.toString()
 
 # buffer encoder
 bufferEncoder = (buf, algo) ->
@@ -113,7 +115,9 @@ bufferEncoder = (buf, algo) ->
 
 # string decoder
 decoder = (str, algo) ->
-  bufferDecoder(new Buffer(str), algo).toString()
+  dec = bufferDecoder(new Buffer(str), algo)
+  if dec isnt undefined
+    dec.toString()
 
 # buffer decoder
 bufferDecoder = (buf, algo) ->
