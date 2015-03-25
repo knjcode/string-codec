@@ -77,6 +77,8 @@ encoder = (str, algo) ->
   enc = bufferEncoder(new Buffer(str), algo)
   if enc isnt undefined
     enc.toString()
+  else
+    ""
 
 # buffer encoder
 bufferEncoder = (buf, algo) ->
@@ -118,6 +120,8 @@ decoder = (str, algo) ->
   dec = bufferDecoder(new Buffer(str), algo)
   if dec isnt undefined
     dec.toString()
+  else
+    ""
 
 # buffer decoder
 bufferDecoder = (buf, algo) ->
