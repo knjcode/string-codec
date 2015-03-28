@@ -53,6 +53,8 @@ encode_testset =
     'abcDEF':'abcdef'
   'upper':
     'abcDEF':'ABCDEF'
+  'punycode':
+    'ドメイン名例.jp':'xn--eckwd4c7cu47r2wf.jp'
   'md4':
     'abc':'a448017aaf21d8525fc10ae87aa6729d'
   'md5':
@@ -109,6 +111,8 @@ decode_testset =
   # depends on local timezone
   # 'unixtime':
   #   '1424580000':'Sun Feb 22 2015 13:40:00 GMT+0900 (JST)'
+  'punycode':
+    'xn--eckwd4c7cu47r2wf.jp':'ドメイン名例.jp'
   # require internet connection
   # 'md5':
   #   '5d41402abc4b2a76b9719d911017c592':'hello'
