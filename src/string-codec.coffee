@@ -104,7 +104,7 @@ bufferEncoder = (buf, algo) ->
     when 'url'
       new Buffer(encodeURIComponent(buf.toString()))
     when 'unixtime'
-      new Buffer(Date.parse(buf.toString()).toString(10))
+      new Buffer((Date.parse(buf.toString())/1000).toString(10))
     when 'lower'
       new Buffer(buf.toString().toLowerCase())
     when 'upper'
@@ -144,7 +144,7 @@ bufferDecoder = (buf, algo) ->
     when 'url'
       new Buffer(decodeURIComponent(buf.toString()))
     when 'unixtime'
-      new Buffer((new Date(parseInt(buf.toString())).toString()))
+      new Buffer((new Date(parseInt(buf.toString())*1000)).toString())
     when 'md5'
       new Buffer(decrypter[algo](buf.toString()))
     else

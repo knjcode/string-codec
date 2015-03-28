@@ -48,7 +48,7 @@ encode_testset =
   'url':
     'あいうえお':'%E3%81%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A'
   'unixtime':
-    'Sun Feb 22 2015 13:40:00 GMT+0900 (JST)':'1424580000000'
+    'Sun Feb 22 2015 13:40:00 GMT+0900 (JST)':'1424580000'
   'lower':
     'abcDEF':'abcdef'
   'upper':
@@ -108,7 +108,7 @@ decode_testset =
     '%E3%81%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A':'あいうえお'
   # depends on local timezone
   # 'unixtime':
-  #   '1424580000000':'Sun Feb 22 2015 13:40:00 GMT+0900 (JST)'
+  #   '1424580000':'Sun Feb 22 2015 13:40:00 GMT+0900 (JST)'
   # require internet connection
   # 'md5':
   #   '5d41402abc4b2a76b9719d911017c592':'hello'
