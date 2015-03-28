@@ -8,11 +8,13 @@ caesar = require 'caesar-salad'
 adler32 = require 'adler-32'
 cheerio = require 'cheerio'
 request = require 'sync-request'
+punycode = require 'punycode'
 
 allencoder = []
 encalgos = ['hex', 'ascii', 'base64', 'base85', 'z85', 'ascii85', 'base91',
             'rot5', 'rot13', 'rot18', 'rot47', 'rev', 'crc1', 'crc8', 'crc16',
-            'crc24', 'crc32', 'adler32', 'url', 'unixtime', 'lower', 'upper']
+            'crc24', 'crc32', 'adler32', 'url', 'unixtime', 'lower', 'upper',
+            'punycode']
 enchashes = ['md4', 'md5', 'sha', 'sha1', 'sha224', 'sha256', 'sha384',
              'sha512', 'rmd160', 'whirlpool']
 allenchashes = enchashes.concat(crypto.getHashes())
@@ -22,7 +24,8 @@ allencoder = allencoder.concat(encalgos,allenchashes)
 
 alldecoder = []
 decalgos = ['hex', 'ascii', 'base64', 'base85', 'z85', 'ascii85', 'base91',
-            'rot5', 'rot13', 'rot18', 'rot47', 'rev', 'url', 'unixtime']
+            'rot5', 'rot13', 'rot18', 'rot47', 'rev', 'url', 'unixtime',
+            'punycode']
 dechashes = ['md5']
 alldecoder = alldecoder.concat(decalgos,dechashes)
 
@@ -109,6 +112,8 @@ bufferEncoder = (buf, algo) ->
       new Buffer(buf.toString().toLowerCase())
     when 'upper'
       new Buffer(buf.toString().toUpperCase())
+    when 'punycode'
+      new Buffer(punycode.toASCII(buf.toString()))
     else
       if algo in allenchashes
         new Buffer(crypto.createHash(algo).update(buf).digest('hex'))
@@ -145,6 +150,8 @@ bufferDecoder = (buf, algo) ->
       new Buffer(decodeURIComponent(buf.toString()))
     when 'unixtime'
       new Buffer((new Date(parseInt(buf.toString())*1000)).toString())
+    when 'punycode'
+      new Buffer(punycode.toUnicode(buf.toString()))
     when 'md5'
       new Buffer(decrypter[algo](buf.toString()))
     else

@@ -48,12 +48,12 @@ List supported algorithm:
     codec.ENC_ALGOS
     // => ["hex","ascii","base64","base85","z85","ascii85","base91","rot5",
            "rot13", "rot18", "rot47","rev","crc1","crc8","crc16","crc24",
-           "crc32","adler32","url","unixtime","lower","upper"]
+           "crc32","adler32","url","unixtime","lower","upper","punycode", etc.
     
     // list array of decoding algorithm
     codec.DEC_ALGOS
     // => ["hex","ascii","base64","base85","z85","ascii85","base91","rot5",
-           "rot13","rot18","rot47","rev","url","unixtime"]
+           "rot13","rot18","rot47","rev","url","unixtime","punycode", etc.
 
 ## API
 
@@ -121,6 +121,7 @@ __bufferEncoder__ requires Buffer input and output Buffer
 |unixtime|date string|unix timestamp|
 |lower|string|string|
 |upper|string|string|
+|punycode|string|punycode|
 |md4|string|md4|
 |md5|string|md5|
 |sha|string|sha|
@@ -150,6 +151,7 @@ __bufferDecoder__ requires Buffer input and outputs Buffer
 |rev|string|string|
 |url|url encode|string|
 |unixtime|unix timestamp|date string|
+|punycode|punycode|string|
 |md5|md5|string|
 
 ### Input hex string
