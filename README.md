@@ -103,35 +103,15 @@ list all supported decoding algorithm (DEC_ALGOS + DEC_HASHES)
 
 __encoder__ requires string input and outputs string
 
-__bufferEncoder__ requires Buffer input and output Buffer
+__bufferEncoder__ requires Buffer input and outputs Buffer
 
 |algorithm|input|output|
 |:--|:--|:--|
 |hex|string|hex string|
 |ascii|hex string|string|
-|base64|string|base64|
-|base85 (z85)|string|base85|
-|ascii85|string|ascii85|
-|base91|string|string|
-|rot5/rot13/rot18/rot47|string|string|
-|rev (reverse string)|string|string|
-|crc1/crc8/crc16<br>crc24/crc32|string|crc checksum|
-|adler32|string|adler32|
-|url (url encoding)|string|url encode|
 |unixtime|date string|unix timestamp|
-|lower|string|string|
-|upper|string|string|
-|punycode|string|punycode|
-|md4|string|md4|
-|md5|string|md5|
-|sha|string|sha|
-|sha1|string|sha1|
-|sha224|string|sha224|
-|sha256|string|sha256|
-|sha384|string|sha384|
-|sha512|string|sha512|
-|rmd160|string|rmd160|
-|whirlpool|string|whirlpool|
+|rot5/rot13/rot18/rot47<br>rev (reverse string)<br>url (url encoding)<br>lower<br>upper<br>punycode|string|string|
+|base64<br>base85 (z85)<br>ascii85<br>base91<br>crc1/crc8/crc16/crc24/crc32<br>adler32<br>md4<br>md5<br>sha<br>sha1<br>sha224<br>sha256<br>sha384<br>sha512<br>rmd160<br>whirlpool|string<br>or<br>Buffer|string<br>or<br>Buffer|
 
 ### decode / bufferDecoder
 
@@ -143,16 +123,9 @@ __bufferDecoder__ requires Buffer input and outputs Buffer
 |:--|:--|:--|
 |hex|hex string|string|
 |ascii|string|hex string|
-|base64|base64|string|
-|base85 (z85)|base85|string|
-|ascii85|ascii85|string|
-|base91|base91|string|
-|rot5/rot13/rot18/rot47|string|string|
-|rev|string|string|
-|url|url encode|string|
 |unixtime|unix timestamp|date string|
-|punycode|punycode|string|
-|md5|md5|string|
+|rot5/rot13/rot18/rot47<br>rev<br>url<br>punycode|string|string|
+|base64<br>base85 (z85)<br>ascii85<br>base91<br>md5|string<br>or<br>Buffer|string<br>or<br>Buffer|
 
 ### Input hex string
 
