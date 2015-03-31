@@ -91,8 +91,7 @@ bufferEncoder = (buf, algo) ->
     when 'ascii85'
       new Buffer(ascii85.PostScript.encode(buf))
     when 'base91'
-      if hex = hex_parse(buf.toString())
-        base91.encode(new Buffer(hex, 'hex'))
+      base91.encode(buf)
     when 'ascii'
       if hex = hex_parse(buf.toString())
         Buffer(hex, 'hex')
@@ -139,7 +138,7 @@ bufferDecoder = (buf, algo) ->
     when 'ascii85'
       new Buffer(ascii85.decode(buf))
     when 'base91'
-      new Buffer(base91.decode(buf).toString('hex'))
+      base91.decode(buf)
     when 'ascii'
       new Buffer(buf.toString('hex'))
     when 'rot5', 'rot13', 'rot18', 'rot47', 'rev'
