@@ -110,9 +110,9 @@ __bufferEncoder__ requires Buffer input and output Buffer
 |hex|string|hex string|
 |ascii|hex string|string|
 |base64|string|base64|
-|base85 (z85))|string|base85|
+|base85 (z85)|string|base85|
 |ascii85|string|ascii85|
-|base91|hex string|string|
+|base91|string|string|
 |rot5/rot13/rot18/rot47|string|string|
 |rev (reverse string)|string|string|
 |crc1/crc8/crc16<br>crc24/crc32|string|crc checksum|
@@ -146,7 +146,7 @@ __bufferDecoder__ requires Buffer input and outputs Buffer
 |base64|base64|string|
 |base85 (z85)|base85|string|
 |ascii85|ascii85|string|
-|base91|base91|hex string|
+|base91|base91|string|
 |rot5/rot13/rot18/rot47|string|string|
 |rev|string|string|
 |url|url encode|string|

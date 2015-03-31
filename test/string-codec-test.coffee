@@ -18,9 +18,7 @@ encode_testset =
   'ascii85':
     'abc':'<~@:E^~>'
   'base91':
-    '0f009e812822216414e849e10bd2f128e127dbe2455c05782c51ecf1b8b00b':'PASSWORD/IS/WHICH+ENCODING+DO+YOU+LIKE'
-    '0x0f009e812822216414e849e10bd2f128e127dbe2455c05782c51ecf1b8b00b':'PASSWORD/IS/WHICH+ENCODING+DO+YOU+LIKE'
-    '0f:00:9e:81:28:22:21:64:14:e8:49:e1:0b:d2:f1:28:e1:27:db:e2:45:5c:05:78:2c:51:ec:f1:b8:b0:0b':'PASSWORD/IS/WHICH+ENCODING+DO+YOU+LIKE'
+    'node.js rules!':'lref5gTT$FQ;C90ohA'
   'rot5':
     'abc123':'abc678'
   'rot13':
@@ -93,7 +91,7 @@ decode_testset =
   'ascii85':
     '<~@:E^~>':'abc'
   'base91':
-    'PASSWORD/IS/WHICH+ENCODING+DO+YOU+LIKE':'0f009e812822216414e849e10bd2f128e127dbe2455c05782c51ecf1b8b00b'
+    'lref5gTT$FQ;C90ohA':'node.js rules!'
   'rot5':
     'abc678':'abc123'
   'rot13':
