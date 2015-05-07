@@ -10,6 +10,9 @@ cheerio = require 'cheerio'
 request = require 'sync-request'
 punycode = require 'punycode'
 
+version = require('../package.json').version
+useragent = 'string-codec ' + version
+
 allencoder = []
 encalgos = ['hex', 'ascii', 'base64', 'base85', 'z85', 'ascii85', 'base91',
             'rot5', 'rot13', 'rot18', 'rot47', 'rev', 'crc1', 'crc8', 'crc16',
@@ -28,6 +31,7 @@ decalgos = ['hex', 'ascii', 'base64', 'base85', 'z85', 'ascii85', 'base91',
             'punycode']
 dechashes = ['md5']
 alldecoder = alldecoder.concat(decalgos,dechashes)
+
 
 # hex parse helper
 hex_parse = (str) ->
@@ -59,7 +63,8 @@ recipro = {
 decmd5 = (str) ->
   baseUrl = 'http://www.md5-hash.com/md5-hashing-decrypt/'
   try
-    res = request('GET', baseUrl + str)
+    res = request('GET', baseUrl + str,
+                  { headers: { 'User-Agent': useragent } })
   catch error
     return error
   $ = cheerio.load res.getBody('utf8')
