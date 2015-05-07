@@ -61,6 +61,9 @@ recipro = {
 
 # md5 decrypter
 decmd5 = (str) ->
+  if str.length isnt 32
+    return 'Invalid MD5 hash'
+
   baseUrl = 'http://www.md5-hash.com/md5-hashing-decrypt/'
   try
     res = request('GET', baseUrl + str,
